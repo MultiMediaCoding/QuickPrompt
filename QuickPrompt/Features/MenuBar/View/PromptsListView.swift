@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct PromptsListView: View {
+    @EnvironmentObject var viewModel: MenuBarViewModel
     var body: some View {
         VStack(alignment: .leading){
-            ForEach(gptPromptsLibrary, id: \.self) { prompt in
+            ForEach(viewModel.prompts, id: \.self) { prompt in
                 PromptListItem(prompt: prompt)
             }
         }
