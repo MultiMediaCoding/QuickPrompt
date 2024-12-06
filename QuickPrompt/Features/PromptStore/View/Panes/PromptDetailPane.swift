@@ -31,7 +31,7 @@ struct PromptDetailPane: View {
                 
                 Spacer()
             }
-            .padding(.top, 20)
+            .padding(.top, 10)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .navigationTitle("Prompt Details")

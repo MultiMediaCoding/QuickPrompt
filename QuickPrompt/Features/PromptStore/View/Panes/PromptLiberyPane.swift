@@ -3,6 +3,7 @@ import SwiftUI
 struct PromptLibraryPane: View {
     
     @State private var searchText = ""
+    @State private var newPromptSheet = false
     
     let columns = [
         GridItem(.flexible()),
@@ -34,6 +35,19 @@ struct PromptLibraryPane: View {
                 }
             )
             .navigationTitle("Library")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        newPromptSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $newPromptSheet) {
+                NewPromptView(presented: $newPromptSheet)
+                    .frame(width: 600)
+            }
         }
     }
     

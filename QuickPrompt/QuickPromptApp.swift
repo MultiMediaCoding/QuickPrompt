@@ -15,7 +15,7 @@ struct QuickPromptApp: App {
             MainView()
         }
         
-        MenuBarExtra("QuickPrompt", systemImage: "pencil.and.scribble") {
+        MenuBarExtra("QuickPrompt", systemImage: "note.text") {
             MenuBarView()
                 .environmentObject(menuBarViewModel)
         }

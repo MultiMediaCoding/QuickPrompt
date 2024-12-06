@@ -16,7 +16,7 @@ struct Prompt: Identifiable, Hashable {
     var category: Category
     var createdDate: Date
     
-    enum Category: String {
+    enum Category: String, CaseIterable, Hashable {
         case Education
         case Developers
         case Fun
