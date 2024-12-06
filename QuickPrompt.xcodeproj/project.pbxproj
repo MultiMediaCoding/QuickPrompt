@@ -29,6 +29,23 @@
 		3A34470F2D03154B008E5D10 /* QuickPromptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickPromptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BBB124F72D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPrompt" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Assets.xcassets",
+			);
+			target = 3A3446F32D03154A008E5D10 /* QuickPrompt */;
+		};
+		BBB124F82D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPromptUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Assets.xcassets",
+			);
+			target = 3A34470E2D03154B008E5D10 /* QuickPromptUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3A3446F62D03154A008E5D10 /* QuickPrompt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -43,6 +60,15 @@
 		3A3447122D03154B008E5D10 /* QuickPromptUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = QuickPromptUITests;
+			sourceTree = "<group>";
+		};
+		BBB124F52D0318FA0018965A /* Preview Content */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BBB124F72D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPrompt" target */,
+				BBB124F82D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPromptUITests" target */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +101,7 @@
 		3A3446EB2D03154A008E5D10 = {
 			isa = PBXGroup;
 			children = (
+				BBB124F52D0318FA0018965A /* Preview Content */,
 				3A3446F62D03154A008E5D10 /* QuickPrompt */,
 				3A3447082D03154B008E5D10 /* QuickPromptTests */,
 				3A3447122D03154B008E5D10 /* QuickPromptUITests */,
@@ -155,6 +182,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				3A3447122D03154B008E5D10 /* QuickPromptUITests */,
+				BBB124F52D0318FA0018965A /* Preview Content */,
 			);
 			name = QuickPromptUITests;
 			packageProductDependencies = (
@@ -396,7 +424,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"QuickPrompt/Preview Content\"";
 				DEVELOPMENT_TEAM = NRD4L2MCC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -406,6 +433,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.squash.QuickPrompt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -423,7 +451,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"QuickPrompt/Preview Content\"";
 				DEVELOPMENT_TEAM = NRD4L2MCC7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -433,6 +460,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.squash.QuickPrompt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
