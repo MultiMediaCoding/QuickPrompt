@@ -12,7 +12,7 @@ struct QuickPromptApp: App {
     @StateObject var menuBarViewModel: MenuBarViewModel = .init()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
         
         MenuBarExtra("QuickPrompt", systemImage: "pencil.and.scribble") {
