@@ -11,15 +11,6 @@ struct LibraryGridItem: View {
     
     let prompt: Prompt
     
-    let promptSymbols: [String: String] = [
-        "Education": "graduationcap",
-        "Developers": "hammer",
-        "Fun": "smiley",
-        "PreciseAwnsers": "questionmark.circle",
-        "Lists": "list.bullet"
-    ]
-    
-    
     var body: some View {
         Rectangle()
             .fill(.quinary)

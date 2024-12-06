@@ -29,46 +29,10 @@
 		3A34470F2D03154B008E5D10 /* QuickPromptUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickPromptUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		BBB124F72D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPrompt" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Preview Assets.xcassets",
-			);
-			target = 3A3446F32D03154A008E5D10 /* QuickPrompt */;
-		};
-		BBB124F82D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPromptUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Preview Assets.xcassets",
-			);
-			target = 3A34470E2D03154B008E5D10 /* QuickPromptUITests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3A3446F62D03154A008E5D10 /* QuickPrompt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = QuickPrompt;
-			sourceTree = "<group>";
-		};
-		3A3447082D03154B008E5D10 /* QuickPromptTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuickPromptTests;
-			sourceTree = "<group>";
-		};
-		3A3447122D03154B008E5D10 /* QuickPromptUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = QuickPromptUITests;
-			sourceTree = "<group>";
-		};
-		BBB124F52D0318FA0018965A /* Preview Content */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				BBB124F72D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPrompt" target */,
-				BBB124F82D0318FA0018965A /* Exceptions for "Preview Content" folder in "QuickPromptUITests" target */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -101,10 +65,7 @@
 		3A3446EB2D03154A008E5D10 = {
 			isa = PBXGroup;
 			children = (
-				BBB124F52D0318FA0018965A /* Preview Content */,
 				3A3446F62D03154A008E5D10 /* QuickPrompt */,
-				3A3447082D03154B008E5D10 /* QuickPromptTests */,
-				3A3447122D03154B008E5D10 /* QuickPromptUITests */,
 				3A3446F52D03154A008E5D10 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,9 +118,6 @@
 			dependencies = (
 				3A3447072D03154B008E5D10 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				3A3447082D03154B008E5D10 /* QuickPromptTests */,
-			);
 			name = QuickPromptTests;
 			packageProductDependencies = (
 			);
@@ -179,10 +137,6 @@
 			);
 			dependencies = (
 				3A3447112D03154B008E5D10 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3A3447122D03154B008E5D10 /* QuickPromptUITests */,
-				BBB124F52D0318FA0018965A /* Preview Content */,
 			);
 			name = QuickPromptUITests;
 			packageProductDependencies = (

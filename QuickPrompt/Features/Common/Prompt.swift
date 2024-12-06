@@ -1,58 +1,66 @@
 //
 //  Prompt.swift
-//  QuickPrompt
+//  QuickPrompt App
 //
-//  Created by Hans Poreda on 06.12.24.
+//  Created by Lovis on 16.12.24.
 //
 
-import Foundation
+import SwiftUI
+import CloudKit
 
 struct Prompt: Identifiable, Hashable {
-    let id = UUID()
-    let title: String
-    let systemName: String
-    let text: String
+    let id: String
+    var icon: String { promptSymbols[category.rawValue] ?? "text.alignleft" }
+    var title: String
+    var text: String
+    var category: Category
+    var createdDate: Date
+    
+    enum Category: String {
+        case Education
+        case Developers
+        case Fun
+        case PreciseAwnsers
+        case Lists
+    }
+    
+    init(id: String = UUID().uuidString, title: String, text: String, category: Category, createdDate: Date = Date()) {
+        self.id = id
+        self.title = title
+        self.text = text
+        self.category = category
+        self.createdDate = createdDate
+    }
 }
 
-let testPrompts: [Prompt] = [
-    Prompt(
-        title: "Ideen generieren",
-        systemName: "lightbulb",
-        text: "Hilf mir, kreative Ideen für eine neue App-Funktion zu entwickeln, die auf Benutzerpräferenzen basiert."
-    ),
-    Prompt(
-        title: "Code Review",
-        systemName: "doc.text.magnifyingglass",
-        text: "Analysiere diesen Swift-Code und schlage Optimierungen vor. Achte auf Lesbarkeit, Performance und Best Practices."
-    ),
-    Prompt(
-        title: "Fehlersuche",
-        systemName: "ant",
-        text: "Hier ist ein Bug in meinem Swift-Code. Beschreibe mögliche Ursachen und wie ich ihn beheben kann."
-    ),
-    Prompt(
-        title: "UI/UX Beratung",
-        systemName: "paintpalette",
-        text: "Gib Vorschläge, wie ich die Benutzeroberfläche meiner App verbessern kann, um die Navigation intuitiver zu gestalten."
-    ),
-    Prompt(
-        title: "Debugging-Strategien",
-        systemName: "wrench.and.screwdriver",
-        text: "Welche Schritte sollte ich unternehmen, um eine App zu debuggen, die in bestimmten Fällen abstürzt?"
-    ),
-    Prompt(
-        title: "Dokumentation schreiben",
-        systemName: "book",
-        text: "Hilf mir, eine klare und verständliche Dokumentation für die Funktionalitäten meiner App zu schreiben."
-    ),
-    Prompt(
-        title: "Benutzerfeedback analysieren",
-        systemName: "person.2.fill",
-        text: "Analysiere dieses Benutzerfeedback und schlage Prioritäten für die nächsten Entwicklungszyklen vor."
-    ),
-    Prompt(
-        title: "Testfälle erstellen",
-        systemName: "checkmark.seal",
-        text: "Hilf mir, Testfälle für die Unit-Tests meiner App zu definieren, die verschiedene Szenarien abdecken."
-    )
-]
+enum PromptRecordKeys: String {
+    case type = "Prompt"
+    case title
+    case text
+    case category
+    case createdDate
+}
+
+extension Prompt {
+    var record: CKRecord {
+        let record = CKRecord(recordType: PromptRecordKeys.type.rawValue)
+        record[PromptRecordKeys.title.rawValue] = self.title
+        record[PromptRecordKeys.text.rawValue] = self.text
+        record[PromptRecordKeys.category.rawValue] = self.category.rawValue
+        record[PromptRecordKeys.createdDate.rawValue] = self.createdDate as CKRecordValue
+        return record
+    }
+    
+    init?(from record: CKRecord) {
+        let id = record.recordID.recordName
+        
+        guard
+            let title = record[PromptRecordKeys.title.rawValue] as? String,
+            let text = record[PromptRecordKeys.text.rawValue] as? String,
+            let category = record[PromptRecordKeys.category.rawValue] as? String,
+            let createdDate = record[PromptRecordKeys.createdDate.rawValue] as? Date
+        else { return nil }
+        
+        self = .init(id: id, title: title, text: text, category: Prompt.Category(rawValue: category) ?? .PreciseAwnsers, createdDate: createdDate)
+    }
+}

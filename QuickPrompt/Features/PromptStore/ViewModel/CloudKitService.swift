@@ -30,7 +30,9 @@ class CloudKitService: ObservableObject {
             let records = response.matchResults.compactMap { try? $0.1.get() }
             let prompts = records.compactMap(Prompt.init)
             withAnimation(.spring){
-                self.prompts = prompts
+                DispatchQueue.main.async {
+                    self.prompts = prompts
+                }
             }
         }
         catch {

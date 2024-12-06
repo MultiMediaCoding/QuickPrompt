@@ -10,7 +10,7 @@ import SwiftUI
 struct PromptsListView: View {
     var body: some View {
         VStack(alignment: .leading){
-            ForEach(testPrompts, id: \.self) { prompt in
+            ForEach(gptPromptsLibrary, id: \.self) { prompt in
                 PromptListItem(prompt: prompt)
             }
         }

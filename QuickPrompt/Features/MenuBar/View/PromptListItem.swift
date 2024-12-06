@@ -15,7 +15,7 @@ struct PromptListItem: View {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Image(systemName: prompt.systemName)
+                        Image(systemName: prompt.icon)
                             .font(.subheadline)
                             .foregroundStyle(Color.accentColor)
                         
@@ -51,5 +51,5 @@ struct PromptListItem: View {
 }
 
 #Preview {
-    PromptListItem(prompt: testPrompts[0])
+    PromptListItem(prompt: gptPromptsLibrary[0])
 }
