@@ -20,8 +20,6 @@ class PromptsViewModel: ObservableObject {
     }
     
     var prompts: [Prompt] { searchText == "" ? savedPrompts : filteredPrompts }
-
-    
     
     init() {
         Task {

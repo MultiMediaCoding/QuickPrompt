@@ -5,7 +5,7 @@ struct PromptLibraryPane: View {
     @State private var searchText = ""
     @State private var newPromptSheet = false
     
-    @EnvironmentObject var cloudkitViewModel: CloudKitViewModel
+   @EnvironmentObject var cloudkitViewModel: CloudKitViewModel
     
     let columns = [
         GridItem(.flexible()),
@@ -36,6 +36,9 @@ struct PromptLibraryPane: View {
                     }
                 }
             )
+            .task {
+                await cloudkitViewModel.getPrompts()
+            }
             .onChange(of: searchText) { searchText in
                 Task {
                     await cloudkitViewModel.searchPrompts(searchText: searchText)

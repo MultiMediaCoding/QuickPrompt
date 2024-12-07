@@ -30,8 +30,10 @@ class CloudKitViewModel: ObservableObject {
     
     func searchPrompts(searchText: String) async {
         if let prompts = await CloudKitService.shared.searchPrompts(searchText: searchText) {
-            withAnimation(.spring) {
-                self.searchResults = prompts
+            DispatchQueue.main.async {
+                withAnimation(.spring) {
+                    self.searchResults = prompts
+                }
             }
         }
     }

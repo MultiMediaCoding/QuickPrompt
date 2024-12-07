@@ -13,11 +13,17 @@ struct GeneralSidebarSection: View {
                 Text("Keine Prompts")
             }
             else {
-                ForEach(promptsViewModel.prompts, id: \.self) { prompt in
+                ForEach(promptsViewModel.savedPrompts, id: \.self) { prompt in
                     NavigationLink {
                         PromptDetailPane(prompt: prompt, formattedDate: cloudKitViewModel.formatDate(prompt.createdDate))
                     } label: {
                         SidebarListElement(prompt: prompt)
+                            .contextMenu {
+                                Button("Löschen") {
+                                    promptsViewModel.deletePrompt(prompt)
+                                }
+                                .keyboardShortcut(.delete)
+                            }
                     }
                 }
             }
