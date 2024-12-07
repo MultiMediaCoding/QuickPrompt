@@ -1,18 +1,17 @@
 import SwiftUI
 
-struct MoreSidebarSection: View {
+struct SavedPromptsSidebarSection: View {
     
     @Binding var selection: SidebarPane?
-    
     var body: some View {
                 
-        Section(header: Text("Library")) {
+        Section(header: Text("Persönlich")) {
 			
 			NavigationLink {
-                PromptLibraryPane()
+                SavedPromptsPane()
 			} label: {
                 HStack{
-                    Label("Prompt Library", systemImage: "sparkles.rectangle.stack")
+                    Label("Gespeichert", systemImage: "bookmark")
                 }
                 .padding(.vertical, 4)
 			}
@@ -23,6 +22,6 @@ struct MoreSidebarSection: View {
 
 struct MoreSidebarSection_Previews: PreviewProvider {
     static var previews: some View {
-        MoreSidebarSection(selection: .constant(.moreStuff))
+        SavedPromptsSidebarSection(selection: .constant(.moreStuff))
     }
 }

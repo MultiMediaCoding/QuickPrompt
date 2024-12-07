@@ -8,8 +8,8 @@ struct Sidebar: View {
     
     var body: some View {
         List {
-            MoreSidebarSection(selection: $selection)
-            GeneralSidebarSection(selection: $selection)
+            SavedPromptsSidebarSection(selection: $selection)
+            CategoriesSidebarSection(selection: $selection)
         }
         .listStyle(SidebarListStyle())
         .frame(minWidth: 180, idealWidth: 180, maxWidth: 300)

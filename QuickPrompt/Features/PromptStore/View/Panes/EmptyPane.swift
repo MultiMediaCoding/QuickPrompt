@@ -2,11 +2,12 @@ import SwiftUI
 
 struct EmptyPane: View {
     var body: some View {
-        Pane {
-            VStack {
-                Text("No entry selected")
+            Pane {
+                VStack {
+                    Text("No entry selected")
+                        .foregroundStyle(.secondary)
+                }
             }
-        }
     }
 }
 

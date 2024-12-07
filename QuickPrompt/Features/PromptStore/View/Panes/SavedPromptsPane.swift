@@ -1,13 +1,11 @@
 import SwiftUI
 
-struct PromptLibraryPane: View {
-    
-    let category: Prompt.Category
+struct SavedPromptsPane: View {
     
     @State private var searchText = ""
-    @State private var newPromptSheet = false
     
-   @EnvironmentObject var cloudkitViewModel: CloudKitViewModel
+    @EnvironmentObject var cloudkitViewModel: CloudKitViewModel
+    @EnvironmentObject var promptsViewModel: PromptsViewModel
     
     var body: some View {
         NavigationStack {
@@ -15,7 +13,11 @@ struct PromptLibraryPane: View {
             if searchResults.isEmpty {
                 VStack{
                     Spacer()
-                    Text("Diese Kategorie ist noch leer")
+                    HStack(spacing: 4){
+                        Text("Füge mit")
+                        Image(systemName: "bookmark.fill")
+                        Text("Prompts zu deiner persönlichen Sammlung hinzu")
+                    }
                         .foregroundStyle(.secondary)
                 }
             }
@@ -53,30 +55,16 @@ struct PromptLibraryPane: View {
                 }
             }
             .navigationTitle("Library")
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button {
-                        newPromptSheet = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $newPromptSheet) {
-                NewPromptView(presented: $newPromptSheet)
-                    .frame(width: 600)
-            }
         }
     }
     
     var searchResults: [Prompt] {
-        if category == .All {
-            return searchText.isEmpty ? cloudkitViewModel.prompts : cloudkitViewModel.searchResults
+        if searchText.isEmpty {
+            return promptsViewModel.savedPrompts
         } else {
-            if searchText.isEmpty {
-                return cloudkitViewModel.prompts.filter { $0.category == self.category }
-            } else {
-                return cloudkitViewModel.searchResults.filter { $0.category == self.category }
+            return promptsViewModel.savedPrompts.filter { prompt in
+                prompt.title.localizedCaseInsensitiveContains(searchText) ||
+                prompt.text.localizedCaseInsensitiveContains(searchText)
             }
         }
     }
@@ -84,12 +72,5 @@ struct PromptLibraryPane: View {
     private func adaptiveColumns(for width: CGFloat) -> [GridItem] {
         let columnCount = max(1, Int(width / 200))
         return Array(repeating: GridItem(.flexible()), count: columnCount)
-    }
-}
-
-
-struct WhatsUpPane_Previews: PreviewProvider {
-    static var previews: some View {
-        PromptLibraryPane(category: Prompt.Category.Education)
     }
 }

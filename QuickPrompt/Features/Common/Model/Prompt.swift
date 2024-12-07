@@ -17,11 +17,12 @@ struct Prompt: Identifiable, Hashable {
     var createdDate: Date
     
     enum Category: String, CaseIterable, Hashable {
+        case All = "Alle Prompts"
         case Education
+        case Lists
         case Developers
         case Fun
-        case PreciseAwnsers
-        case Lists
+        case PreciseAwnsers = "Precise Awnsers"
     }
     
     init(id: String = UUID().uuidString, title: String, text: String, category: Category, createdDate: Date = Date()) {

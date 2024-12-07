@@ -17,45 +17,52 @@ struct LibraryGridItem: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            Rectangle()
-                .fill(.quinary)
-                .frame(height: 150)
-                .overlay(
-                    VStack(alignment: .leading, spacing: 5) {
-                        Image(systemName: promptSymbols[prompt.category.rawValue] ?? "text.alignleft")
-                            .font(.title2)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color.accentColor)
-                            .padding(.bottom, 7)
-                        
-                        
-                        Text(prompt.category.rawValue)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(Color.accentColor.opacity(0.1))
-                            .foregroundStyle(Color.accentColor)
-                            .clipShape(Capsule())
-                            .font(.caption)
-                        
-                        Text(prompt.title)
-                            .foregroundColor(.primary)
-                            .font(.headline)
-                        
-                        Text(prompt.text)
-                            .foregroundColor(.secondary)
-                            .font(.subheadline)
-                    }
-                    .padding()
-                )
-                .cornerRadius(10)
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .fill(.quinary)
+                    .frame(height: 150)
+                    .cornerRadius(10)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Image(systemName: promptSymbols[prompt.category.rawValue] ?? "text.alignleft")
+                        .font(.title2)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color.accentColor)
+                        .padding(.bottom, 7)
+                    
+                    Text(prompt.category.rawValue)
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(Color.accentColor.opacity(0.1))
+                        .foregroundStyle(Color.accentColor)
+                        .clipShape(Capsule())
+                        .font(.caption)
+                    
+                    Text(prompt.title)
+                        .foregroundColor(.primary)
+                        .font(.headline)
+                    
+                    Text(prompt.text)
+                        .foregroundColor(.secondary)
+                        .font(.subheadline)
+                        .lineLimit(2)
+                        .truncationMode(.tail)
+                }
+                .padding()
+            }
             
             if isHovered {
                 HStack(spacing: 8) {
+                    
                     Button {
-                        promptsViewModel.copyPrompt(prompt)
+                        if promptsViewModel.savedPrompts.contains(prompt) {
+                                promptsViewModel.deletePrompt(prompt)
+                        } else {
+                            promptsViewModel.savePrompt(prompt)
+                        }
                     } label: {
                         GroupedBox {
-                            Image(systemName: promptsViewModel.copiedPrompt == prompt ? "rectangle.on.rectangle.fill" : "rectangle.on.rectangle")
+                            Image(systemName: promptsViewModel.savedPrompts.contains(prompt) ? "bookmark.fill" : "bookmark")
                                 .font(.subheadline)
                                 .contentTransition(.symbolEffect(.replace))
                                 .padding(-2)
@@ -64,15 +71,10 @@ struct LibraryGridItem: View {
                     .buttonStyle(.plain)
                     
                     Button {
-                        if promptsViewModel.savedPrompts.contains(prompt) {
-                            promptsViewModel.deletePrompt(prompt)
-                        }
-                        else {
-                            promptsViewModel.savePrompt(prompt)
-                        }
+                        promptsViewModel.copyPrompt(prompt)
                     } label: {
                         GroupedBox {
-                            Image(systemName: promptsViewModel.savedPrompts.contains(prompt) ? "minus.circle" : "plus.circle")
+                            Image(systemName: promptsViewModel.copiedPrompt == prompt ? "rectangle.on.rectangle.fill" : "rectangle.on.rectangle")
                                 .font(.subheadline)
                                 .contentTransition(.symbolEffect(.replace))
                                 .padding(-2)

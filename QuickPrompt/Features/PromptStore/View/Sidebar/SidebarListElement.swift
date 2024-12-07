@@ -8,31 +8,27 @@
 import SwiftUI
 
 struct SidebarListElement: View {
-    let prompt: Prompt
+    let category: String
     
     let promptSymbols: [String: String] = [
         "Education": "graduationcap",
         "Developers": "hammer",
         "Fun": "smiley",
-        "PreciseAwnsers": "questionmark.circle",
+        "Precise Awnsers": "text.redaction",
         "Lists": "list.bullet"
     ]
     
     var body: some View {
-        HStack(spacing: 14) {
-            Image(systemName: promptSymbols[prompt.category.rawValue] ?? "text.alignleft")
+        HStack(spacing: 10) {
+            Image(systemName: promptSymbols[category] ?? "sparkles.rectangle.stack")
                 .font(.title3)
                 .foregroundStyle(Color.accentColor)
             
             VStack(alignment: .leading) {
-                Text(prompt.title)
-                    .font(.headline)
+                Text(category)
                     .foregroundStyle(.primary)
-                Text(prompt.text)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 5)
     }
 }
