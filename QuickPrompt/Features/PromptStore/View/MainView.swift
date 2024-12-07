@@ -1,7 +1,8 @@
 import SwiftUI
+import WhatsNewKit
 
 struct MainView: View {
-    
+    @AppStorage("showWelcomeSheet") var showWelcomeSheet = true
     @StateObject var viewModel = CloudKitService()
     
     var body: some View {
@@ -12,6 +13,11 @@ struct MainView: View {
         .environmentObject(viewModel)
         .task {
             await viewModel.getPrompts()
+        }
+        .sheet(isPresented: $showWelcomeSheet) {
+            WhatsNewView(whatsNew: WhatsNewConfiguration.createWhatsNew {
+                showWelcomeSheet = false
+            }, versionStore: nil)
         }
     }
 }

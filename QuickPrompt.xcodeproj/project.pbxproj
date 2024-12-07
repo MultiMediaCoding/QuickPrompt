@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3AF378A42D0372960066ABC3 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF378A32D0372960066ABC3 /* WhatsNewKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3A3447062D03154B008E5D10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -42,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF378A42D0372960066ABC3 /* WhatsNewKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +105,7 @@
 			);
 			name = QuickPrompt;
 			packageProductDependencies = (
+				3AF378A32D0372960066ABC3 /* WhatsNewKit */,
 			);
 			productName = QuickPrompt;
 			productReference = 3A3446F42D03154A008E5D10 /* QuickPrompt.app */;
@@ -177,6 +183,9 @@
 			);
 			mainGroup = 3A3446EB2D03154A008E5D10;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A3446F52D03154A008E5D10 /* Products */;
 			projectDirPath = "";
@@ -533,6 +542,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3AF378A32D0372960066ABC3 /* WhatsNewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
+			productName = WhatsNewKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3A3446EC2D03154A008E5D10 /* Project object */;
 }
