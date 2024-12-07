@@ -5,6 +5,8 @@ struct PromptLibraryPane: View {
     @State private var searchText = ""
     @State private var newPromptSheet = false
     
+    @EnvironmentObject var cloudkitViewModel: CloudKitViewModel
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -34,6 +36,11 @@ struct PromptLibraryPane: View {
                     }
                 }
             )
+            .onChange(of: searchText) { searchText in
+                Task {
+                    await cloudkitViewModel.searchPrompts(searchText: searchText)
+                }
+            }
             .navigationTitle("Library")
             .toolbar {
                 ToolbarItem(placement: .automatic) {
@@ -53,9 +60,9 @@ struct PromptLibraryPane: View {
     
     var searchResults: [Prompt] {
         if searchText.isEmpty {
-            return gptPromptsLibrary
+            return cloudkitViewModel.prompts
         } else {
-            return gptPromptsLibrary.filter { $0.title.contains(searchText) }
+            return cloudkitViewModel.searchResults
         }
     }
 }

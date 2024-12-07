@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LibraryGridItem: View {
     
-    @StateObject var menuBarViewModel = MenuBarViewModel()
+    @EnvironmentObject var promptsViewModel: PromptsViewModel
     @State private var isHovered: Bool = false
     @State private var isHoverTimerActive: Bool = false
     
@@ -50,18 +50,37 @@ struct LibraryGridItem: View {
                 .cornerRadius(10)
             
             if isHovered {
-                Button {
-                    menuBarViewModel.copyPrompt(prompt)
-                } label: {
-                    GroupedBox {
-                        Image(systemName: menuBarViewModel.copiedPrompt == prompt ? "rectangle.on.rectangle.fill" : "rectangle.on.rectangle")
-                            .font(.subheadline)
-                            .contentTransition(.symbolEffect(.replace))
-                            .padding(-2)
+                HStack(spacing: 8) {
+                    Button {
+                        promptsViewModel.copyPrompt(prompt)
+                    } label: {
+                        GroupedBox {
+                            Image(systemName: promptsViewModel.copiedPrompt == prompt ? "rectangle.on.rectangle.fill" : "rectangle.on.rectangle")
+                                .font(.subheadline)
+                                .contentTransition(.symbolEffect(.replace))
+                                .padding(-2)
+                        }
                     }
-                    .padding(7)
+                    .buttonStyle(.plain)
+                    
+                    Button {
+                        if promptsViewModel.savedPrompts.contains(prompt) {
+                            promptsViewModel.deletePrompt(prompt)
+                        }
+                        else {
+                            promptsViewModel.savePrompt(prompt)
+                        }
+                    } label: {
+                        GroupedBox {
+                            Image(systemName: promptsViewModel.savedPrompts.contains(prompt) ? "minus.circle" : "plus.circle")
+                                .font(.subheadline)
+                                .contentTransition(.symbolEffect(.replace))
+                                .padding(-2)
+                        }
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
+                .padding(7)
             }
         }
         .onHover { hovering in

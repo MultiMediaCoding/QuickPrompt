@@ -3,32 +3,23 @@ import SwiftUI
 struct GeneralSidebarSection: View {
     
     @Binding var selection: SidebarPane?
-    
-    @StateObject var viewModel = CloudKitViewModel()
+    @EnvironmentObject var promptsViewModel: PromptsViewModel
+    @EnvironmentObject var cloudKitViewModel: CloudKitViewModel
     
     var body: some View {
         
-        Section(header: Text("Persönliche Prompts")) {
-            if viewModel.prompts.isEmpty {
-                HStack{
-                    Spacer()
-                    ProgressView()
-                        .scaleEffect(0.5)
-                    Spacer()
-                }
-            } else {
-                ForEach(viewModel.prompts) { prompt in
+        Section("Persönliche Prompts") {
+            if promptsViewModel.prompts.isEmpty {
+                Text("Keine Prompts")
+            }
+            else {
+                ForEach(promptsViewModel.prompts, id: \.self) { prompt in
                     NavigationLink {
-                        PromptDetailPane(prompt: prompt, formattedDate: viewModel.formatDate(prompt.createdDate))
+                        PromptDetailPane(prompt: prompt, formattedDate: cloudKitViewModel.formatDate(prompt.createdDate))
                     } label: {
                         SidebarListElement(prompt: prompt)
                     }
                 }
-            }
-        }
-        .onAppear {
-            Task {
-                await viewModel.getPrompts()
             }
         }
     }

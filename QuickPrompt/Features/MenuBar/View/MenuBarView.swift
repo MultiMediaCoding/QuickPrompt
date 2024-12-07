@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuBarView: View {
-    @EnvironmentObject var viewModel: MenuBarViewModel
+    @EnvironmentObject var viewModel: PromptsViewModel
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {

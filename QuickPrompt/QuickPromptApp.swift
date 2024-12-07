@@ -9,16 +9,18 @@ import SwiftUI
 
 @main
 struct QuickPromptApp: App {
-    @StateObject var menuBarViewModel: MenuBarViewModel = .init()
-    @StateObject var cloudKitViewModel: CloudKitViewModel = .init()
+    @StateObject private var promptsViewModel: PromptsViewModel = .init()
+    @StateObject private var cloudKitViewModel: CloudKitViewModel = .init()
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(promptsViewModel)
+                .environmentObject(cloudKitViewModel)
         }
         
         MenuBarExtra("QuickPrompt", systemImage: "note.text") {
             MenuBarView()
-                .environmentObject(menuBarViewModel)
+                .environmentObject(promptsViewModel)
                 .environmentObject(cloudKitViewModel)
         }
         .menuBarExtraStyle(.window)

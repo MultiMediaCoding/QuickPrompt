@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct PromptsListView: View {
-    @EnvironmentObject var viewModel: MenuBarViewModel
-    @EnvironmentObject var cloudKitViewModel: CloudKitViewModel
+    @EnvironmentObject var viewModel: PromptsViewModel
     var body: some View {
-        if cloudKitViewModel.prompts.isEmpty {
-            ProgressView()
+        if viewModel.prompts.isEmpty {
+            Text("You have no prompts yet.")
+                .foregroundStyle(.secondary)
+                .padding(.top)
         }
         else {
             VStack(alignment: .leading){
-                ForEach(cloudKitViewModel.prompts, id: \.self) { prompt in
+                ForEach(viewModel.prompts, id: \.self) { prompt in
                     PromptListItem(prompt: prompt)
                 }
             }

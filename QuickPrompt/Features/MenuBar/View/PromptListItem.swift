@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PromptListItem: View {
-    @EnvironmentObject var viewModel: MenuBarViewModel
+    @EnvironmentObject var viewModel: PromptsViewModel
     let prompt: Prompt
     var body: some View {
         GroupedBox {
