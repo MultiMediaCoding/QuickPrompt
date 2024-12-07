@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel = CloudKitService()
+    @StateObject var viewModel = CloudKitViewModel()
     
     @State private var titleInput: String = ""
     @State private var textInput: String = ""

@@ -4,7 +4,7 @@ struct GeneralSidebarSection: View {
     
     @Binding var selection: SidebarPane?
     
-    @StateObject var viewModel = CloudKitService()
+    @StateObject var viewModel = CloudKitViewModel()
     
     var body: some View {
         

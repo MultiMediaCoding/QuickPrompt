@@ -9,10 +9,16 @@ import SwiftUI
 
 struct PromptsListView: View {
     @EnvironmentObject var viewModel: MenuBarViewModel
+    @EnvironmentObject var cloudKitViewModel: CloudKitViewModel
     var body: some View {
-        VStack(alignment: .leading){
-            ForEach(viewModel.prompts, id: \.self) { prompt in
-                PromptListItem(prompt: prompt)
+        if cloudKitViewModel.prompts.isEmpty {
+            ProgressView()
+        }
+        else {
+            VStack(alignment: .leading){
+                ForEach(cloudKitViewModel.prompts, id: \.self) { prompt in
+                    PromptListItem(prompt: prompt)
+                }
             }
         }
     }

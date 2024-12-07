@@ -13,7 +13,7 @@ struct NewPromptView: View {
     @State private var titleInput = ""
     @State private var textInput = ""
     @State private var selectedCategory: Prompt.Category = .Education
-    @EnvironmentObject var viewModel: CloudKitService
+    @EnvironmentObject var viewModel: CloudKitViewModel
     
     var body: some View {
         VStack(alignment: .leading) {

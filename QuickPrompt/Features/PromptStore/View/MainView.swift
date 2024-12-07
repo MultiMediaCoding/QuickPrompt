@@ -3,16 +3,12 @@ import WhatsNewKit
 
 struct MainView: View {
     @AppStorage("showWelcomeSheet") var showWelcomeSheet = true
-    @StateObject var viewModel = CloudKitService()
+    @EnvironmentObject var cloudKitViewModel: CloudKitViewModel
     
     var body: some View {
         NavigationView {
             Sidebar()
             EmptyPane()
-        }
-        .environmentObject(viewModel)
-        .task {
-            await viewModel.getPrompts()
         }
         .sheet(isPresented: $showWelcomeSheet) {
             WhatsNewView(whatsNew: WhatsNewConfiguration.createWhatsNew {

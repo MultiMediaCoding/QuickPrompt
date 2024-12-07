@@ -8,13 +8,18 @@
 import SwiftUI
 import CloudKit
 
-class CloudKitService: ObservableObject {
+class CloudKitViewModel: ObservableObject {
     
     @Published var prompts = [Prompt]()
     
-    static let shared = CloudKitService()
     private let database = CKContainer.default().publicCloudDatabase
     private let defaultPredicate = NSPredicate(value: true)
+    
+    init() {
+        Task {
+            await getPrompts()
+        }
+    }
     
     func getPrompt(for recordID: CKRecord.ID) async -> Prompt? {
         guard let record = await getRecord(for: recordID) else { return nil }
@@ -84,7 +89,7 @@ class CloudKitService: ObservableObject {
         }
 }
 
-extension CloudKitService {
+extension CloudKitViewModel {
     func save(_ record: CKRecord) async throws {
         try await CKContainer.default().privateCloudDatabase.save(record)
     }
