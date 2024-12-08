@@ -27,7 +27,9 @@ struct AboutSettingsTab: View {
             
             HStack(alignment: .top, spacing: 15) {
                 Image(nsImage: icon ?? NSImage(named: NSImage.folderName)!)
+                    .resizable()
                     .scaledToFit()
+                    .frame(width: 80, height: 80)
                 
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Developed by")
