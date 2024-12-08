@@ -19,16 +19,8 @@ struct SidebarListElement: View {
     ]
     
     var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: promptSymbols[category] ?? "sparkles.rectangle.stack")
-                .font(.title3)
-                .foregroundStyle(Color.accentColor)
-            
-            VStack(alignment: .leading) {
-                Text(category)
-                    .foregroundStyle(.primary)
-            }
-        }
+        
+        Label(category, systemImage: promptSymbols[category] ?? "sparkles.rectangle.stack")
         .padding(.vertical, 5)
     }
 }

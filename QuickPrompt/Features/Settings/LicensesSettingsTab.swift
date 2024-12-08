@@ -1,60 +1,66 @@
-//
-//  LicensesSettingsTab.swift
-//  QuickPrompt
-//
-//  Created by Lovis Steinmayer on 08.12.24.
-//
-
 import SwiftUI
 
 struct LicensesSettingsTab: View {
     var body: some View {
-        ScrollView{
-            GroupBox{
-                HStack(alignment: .top, spacing: 10){
-                    Image(systemName: "shippingbox")
-                        .font(.title)
-                        .foregroundStyle(Color.accentColor)
-                    
-                    VStack(alignment: .leading){
-                        Text("WhatsNewKit")
-                            .font(.headline)
-                            .foregroundStyle(.primary)
-                        Text("https://swiftpackageindex.com/SvenTiigi/WhatsNewKit")
-                            .font(.callout)
-                            .foregroundStyle(.secondary)
-                        
-                        Text("""
-                            The MIT License (MIT)
+        ScrollView {
+            VStack(spacing: 20) {
+                LicenseElement(
+                    title: "WhatsNewKit",
+                    link: "https://swiftpackageindex.com/SvenTiigi/WhatsNewKit",
+                    licenseText: """
+                    The MIT License (MIT)
 
-                            Copyright (c) 2022 Sven Tiigi
+                    Copyright (c) 2022 Sven Tiigi
 
-                            Permission is hereby granted, free of charge, to any person obtaining a copy
-                            of this software and associated documentation files (the "Software"), to deal
-                            in the Software without restriction, including without limitation the rights
-                            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-                            copies of the Software, and to permit persons to whom the Software is
-                            furnished to do so, subject to the following conditions:
+                    Permission is hereby granted, free of charge, to any person obtaining a copy
+                    of this software and associated documentation files (the "Software"), to deal
+                    in the Software without restriction, including without limitation the rights
+                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                    copies of the Software, and to permit persons to whom the Software is
+                    furnished to do so, subject to the following conditions:
 
-                            The above copyright notice and this permission notice shall be included in all
-                            copies or substantial portions of the Software.
+                    The above copyright notice and this permission notice shall be included in all
+                    copies or substantial portions of the Software.
 
-                            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-                            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-                            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-                            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-                            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-                            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-                            SOFTWARE.
-                            
-                            """)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .padding(.top, 10)
-                    }
-                }
-                .padding()
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                    SOFTWARE.
+                    """
+                )
+                
+                LicenseElement(
+                    title: "swift-macOS-template",
+                    link: "https://github.com/simonweniger/swift-macos-template",
+                    licenseText: """
+                    MIT License
+
+                    Copyright (c) 2023 Simon Weniger
+
+                    Permission is hereby granted, free of charge, to any person obtaining a copy
+                    of this software and associated documentation files (the "Software"), to deal
+                    in the Software without restriction, including without limitation the rights
+                    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                    copies of the Software, and to permit persons to whom the Software is
+                    furnished to do so, subject to the following conditions:
+
+                    The above copyright notice and this permission notice shall be included in all
+                    copies or substantial portions of the Software.
+
+                    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                    SOFTWARE.
+                    """
+                )
             }
+            .padding()
         }
     }
 }

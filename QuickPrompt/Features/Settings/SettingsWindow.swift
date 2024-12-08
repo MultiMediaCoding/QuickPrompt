@@ -29,8 +29,6 @@ struct SettingsWindow: View {
                 }
                 .tag(Tabs.licenses)
         }
-        .padding(20)
-        .scaledToFit()
         .frame(width: 400, height: 190)
     }
     
