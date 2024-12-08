@@ -8,23 +8,37 @@
 import Foundation
 import CloudKit
 
+import Foundation
+
 class PersonalPromptsManager {
     static let shared = PersonalPromptsManager()
     
-    var savedPromptIds: [String] {
+    private let promptsKey = "PersonalPrompts"
+    
+    var savedPrompts: [Prompt] {
         get {
-            UserDefaults.standard.object(forKey:"PersonalPromptIds") as? [String] ?? [String]()
+            if let data = UserDefaults.standard.data(forKey: promptsKey),
+               let prompts = try? JSONDecoder().decode([Prompt].self, from: data) {
+                return prompts
+            }
+            return []
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "PersonalPromptIds")
+            if let data = try? JSONEncoder().encode(newValue) {
+                UserDefaults.standard.set(data, forKey: promptsKey)
+            }
         }
     }
     
-    func addId(_ id: String) {
-        savedPromptIds.append(id)
+    func addPrompt(_ prompt: Prompt) {
+        var prompts = savedPrompts
+        prompts.append(prompt)
+        savedPrompts = prompts
     }
     
-    func removeId(_ id: String) {
-        savedPromptIds.removeAll { $0 == id }
+    func removePrompt(_ prompt: Prompt) {
+        var prompts = savedPrompts
+        prompts.removeAll { $0.id == prompt.id }
+        savedPrompts = prompts
     }
 }

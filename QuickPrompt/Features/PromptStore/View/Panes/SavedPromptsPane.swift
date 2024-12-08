@@ -45,14 +45,6 @@ struct SavedPromptsPane: View {
                         }
                     }
                 )
-                .task {
-                    await cloudkitViewModel.getPrompts()
-                }
-                .onChange(of: searchText) { searchText in
-                    Task {
-                        await cloudkitViewModel.searchPrompts(searchText: searchText)
-                    }
-                }
             }
             .navigationTitle("Library")
         }
