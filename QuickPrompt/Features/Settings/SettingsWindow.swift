@@ -5,6 +5,7 @@ struct SettingsWindow: View {
     private enum Tabs: Hashable {
         case general
         case about
+        case licenses
     }
 
     var body: some View {
@@ -20,9 +21,17 @@ struct SettingsWindow: View {
                     Label("About", systemImage: "info.circle")
                 }
                 .tag(Tabs.about)
+            
+            
+            LicensesSettingsTab()
+                .tabItem {
+                    Label("Licenses", systemImage: "doc.text")
+                }
+                .tag(Tabs.licenses)
         }
         .padding(20)
-        .frame(width: 375, height: 190)
+        .scaledToFit()
+        .frame(width: 400, height: 190)
     }
     
     /// Show settings programmatically
