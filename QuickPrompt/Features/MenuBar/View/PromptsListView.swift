@@ -11,7 +11,7 @@ struct PromptsListView: View {
     @EnvironmentObject var viewModel: PromptsViewModel
     var body: some View {
         if viewModel.prompts.isEmpty {
-            Text("You have no prompts yet.")
+            Text("You have no saved prompts yet.")
                 .foregroundStyle(.secondary)
                 .padding(.top)
         }

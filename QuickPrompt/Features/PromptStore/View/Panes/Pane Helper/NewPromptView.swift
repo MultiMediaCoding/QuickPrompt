@@ -29,8 +29,9 @@ struct NewPromptView: View {
                 }
                 Spacer()
             }
-            .padding(.horizontal, 30)
+            .padding(.horizontal, 20)
             .padding(.top, 30)
+            .padding(.bottom, 10)
             
             VStack(spacing: 10) {
                 TextField("Enter title", text: $titleInput)
@@ -39,7 +40,18 @@ struct NewPromptView: View {
                 
                 Divider()
                 
-                TextField("Enter prompt text", text: $textInput)
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $textInput)
+                        .scrollContentBackground(.hidden)
+                        .background(.clear)
+                        .frame(height: 50)
+                        .padding(.leading, -5)
+                    
+                    if textInput.isEmpty {
+                        Text("Enter your prompt")
+                            .foregroundColor(Color(.tertiaryLabelColor))
+                    }
+                }
                 
                 Divider()
                 

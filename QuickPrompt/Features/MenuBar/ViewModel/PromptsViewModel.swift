@@ -38,6 +38,12 @@ class PromptsViewModel: ObservableObject {
         PersonalPromptsManager.shared.removeId(prompt.id)
     }
     
+    func deleteAllPrompts() {
+        let allIds = savedPrompts.map { $0.id }
+        savedPrompts.removeAll()
+        allIds.forEach { PersonalPromptsManager.shared.removeId($0) }
+    }
+    
     func getSavedPropmpts() async {
         DispatchQueue.main.async {
             withAnimation(.spring) {
