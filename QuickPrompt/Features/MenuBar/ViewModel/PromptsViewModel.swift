@@ -22,49 +22,25 @@ class PromptsViewModel: ObservableObject {
     var prompts: [Prompt] { searchText == "" ? savedPrompts : filteredPrompts }
     
     init() {
-        Task {
-            await getSavedPropmpts()
-        }
+        savedPrompts = PersonalPromptsManager.shared.savedPrompts
     }
     
     func savePrompt(_ prompt: Prompt) {
         savedPrompts.append(prompt)
        
-        PersonalPromptsManager.shared.addId(prompt.id)
+        PersonalPromptsManager.shared.addPrompt(prompt)
     }
     
     func deletePrompt(_ prompt: Prompt) {
         savedPrompts.removeAll(where: { $0.id == prompt.id })
-        PersonalPromptsManager.shared.removeId(prompt.id)
+        PersonalPromptsManager.shared.removePrompt(prompt)
     }
     
     func deleteAllPrompts() {
-        let allIds = savedPrompts.map { $0.id }
+        for prompt in savedPrompts {
+            PersonalPromptsManager.shared.removePrompt(prompt)
+        }
         savedPrompts.removeAll()
-        allIds.forEach { PersonalPromptsManager.shared.removeId($0) }
-    }
-    
-    func getSavedPropmpts() async {
-        DispatchQueue.main.async {
-            withAnimation(.spring) {
-                self.isLoading.toggle()
-            }
-        }
-        
-        let promptIds = PersonalPromptsManager.shared.savedPromptIds
-        let recordIds = promptIds.compactMap({CKRecord.ID(recordName: $0)})
-        
-        if let prompts = await CloudKitService.shared.getPromptsByIds(for: recordIds) {
-            DispatchQueue.main.async {
-                self.savedPrompts = prompts
-            }
-        }
-        
-        DispatchQueue.main.async {
-            withAnimation(.spring) {
-                self.isLoading.toggle()
-            }
-        }
     }
     
     func copyPrompt(_ prompt: Prompt) {

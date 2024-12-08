@@ -10,9 +10,7 @@ import SwiftUI
 struct NewPromptView: View {
     
     @Binding var presented: Bool
-    @State private var titleInput = ""
-    @State private var textInput = ""
-    @State private var selectedCategory: Prompt.Category = .Education
+    @State private var prompt = Prompt(id: UUID().uuidString, title: "", defaultText: "", placeholderText: "", category: .All, inputParameters: [], createdDate: .now)
     @EnvironmentObject var viewModel: CloudKitViewModel
     
     var body: some View {
@@ -33,21 +31,23 @@ struct NewPromptView: View {
             .padding(.top, 30)
             .padding(.bottom, 10)
             
+            InputParametersListView(inputParameters: $prompt.inputParameters)
+            
             VStack(spacing: 10) {
-                TextField("Enter title", text: $titleInput)
+                TextField("Enter title", text: $prompt.title)
                     .font(.headline)
                     .foregroundStyle(Color.accentColor)
                 
                 Divider()
                 
                 ZStack(alignment: .topLeading) {
-                    TextEditor(text: $textInput)
+                    TextEditor(text: $prompt.placeholderText)
                         .scrollContentBackground(.hidden)
                         .background(.clear)
                         .frame(height: 50)
                         .padding(.leading, -5)
                     
-                    if textInput.isEmpty {
+                    if prompt.defaultText.isEmpty {
                         Text("Enter your prompt")
                             .foregroundColor(Color(.tertiaryLabelColor))
                     }
@@ -57,7 +57,7 @@ struct NewPromptView: View {
                 
                 VStack(alignment: .leading) {
                     
-                    Picker("Kategorie", selection: $selectedCategory) {
+                    Picker("Kategorie", selection: $prompt.category) {
                         ForEach(Prompt.Category.allCases, id: \.self) { category in
                             Text(category.rawValue)
                                 .tag(category)
@@ -74,17 +74,19 @@ struct NewPromptView: View {
             .padding(.horizontal)
             .font(.body)
             
+            HighlightedText(inputText: prompt.placeholderText, keywords: prompt.inputParameters.compactMap({$0.parameterName}))
+            
             Spacer()
             
             HStack(spacing: 10) {
                 Button("Fertig") {
-                    if !textInput.isEmpty && !textInput.isEmpty {
-                        viewModel.save(Prompt(title: titleInput, text: textInput, category: selectedCategory, createdDate: Date()))
+                    if prompt.title != "" && prompt.placeholderText != "" {
+                        viewModel.save(prompt)
                         presented = false
                     }
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(textInput.isEmpty && textInput.isEmpty ? .gray : .accentColor)
+                .tint(prompt.title == "" && prompt.defaultText == "" ? .gray : .accentColor)
                 
                 Button("Abbrechen") {
                     presented = false

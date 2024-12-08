@@ -24,7 +24,7 @@ struct PromptDetailPane: View {
                 .padding(.horizontal, 30)
                 
                 GroupBox {
-                    Text(prompt.text)
+                    Text(prompt.defaultText)
                         .padding()
                 }
                 .padding(.horizontal, 30)

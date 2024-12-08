@@ -13,6 +13,8 @@ struct LibraryGridItem: View {
     @State private var isHovered: Bool = false
     @State private var isHoverTimerActive: Bool = false
     
+    @State private var promptConfigurationViewIsPresented: Bool = false
+    
     let prompt: Prompt
     
     var body: some View {
@@ -57,7 +59,10 @@ struct LibraryGridItem: View {
                     Button {
                         if promptsViewModel.savedPrompts.contains(prompt) {
                                 promptsViewModel.deletePrompt(prompt)
-                        } else {
+                        } else if !prompt.inputParameters.isEmpty {
+                            promptConfigurationViewIsPresented.toggle()
+                        }
+                        else {
                             promptsViewModel.savePrompt(prompt)
                         }
                     } label: {
@@ -91,6 +96,9 @@ struct LibraryGridItem: View {
             } else {
                 stopHoverTimer()
             }
+        }
+        .sheet(isPresented: $promptConfigurationViewIsPresented) {
+            PromptConfigurationView(prompt: prompt, isPresented: $promptConfigurationViewIsPresented)
         }
     }
     

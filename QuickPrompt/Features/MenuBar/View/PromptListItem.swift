@@ -51,5 +51,5 @@ struct PromptListItem: View {
 }
 
 #Preview {
-    PromptListItem(prompt: gptPromptsLibrary[0])
+    //PromptListItem(prompt: gptPromptsLibrary[0])
 }
