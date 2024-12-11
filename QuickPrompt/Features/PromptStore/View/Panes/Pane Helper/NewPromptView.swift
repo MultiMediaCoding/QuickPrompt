@@ -1,17 +1,16 @@
-//
-//  NewPromptView.swift
-//  QuickPrompt
-//
-//  Created by Lovis Steinmayer on 06.12.24.
-//
-
 import SwiftUI
 
 struct NewPromptView: View {
     
     @Binding var presented: Bool
     @State private var prompt = Prompt(id: UUID().uuidString, title: "", defaultText: "", placeholderText: "", category: .All, inputParameters: [], createdDate: .now)
+    @State private var selectedTab: Tab = .prompt
     @EnvironmentObject var viewModel: CloudKitViewModel
+    
+    enum Tab: String, CaseIterable {
+        case prompt = "Prompt"
+        case parameters = "Parameters"
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,56 +30,71 @@ struct NewPromptView: View {
             .padding(.top, 30)
             .padding(.bottom, 10)
             
-            InputParametersListView(inputParameters: $prompt.inputParameters)
-            
-            VStack(spacing: 10) {
-                TextField("Enter title", text: $prompt.title)
-                    .font(.headline)
-                    .foregroundStyle(Color.accentColor)
-                
-                Divider()
-                
-                ZStack(alignment: .topLeading) {
-                    TextEditor(text: $prompt.placeholderText)
-                        .scrollContentBackground(.hidden)
-                        .background(.clear)
-                        .frame(height: 50)
-                        .padding(.leading, -5)
-                    
-                    if prompt.defaultText.isEmpty {
-                        Text("Enter your prompt")
-                            .foregroundColor(Color(.tertiaryLabelColor))
-                    }
+            Picker("", selection: $selectedTab) {
+                ForEach(Tab.allCases, id: \.self) { tab in
+                        Text(tab.rawValue)
+                    .tag(tab)
                 }
-                
-                Divider()
-                
-                VStack(alignment: .leading) {
-                    
-                    Picker("Kategorie", selection: $prompt.category) {
-                        ForEach(Prompt.Category.allCases, id: \.self) { category in
-                            Text(category.rawValue)
-                                .tag(category)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                }
-                .padding(.top, 10)
             }
-            .textFieldStyle(.plain)
-            .padding()
-            .background(.ultraThinMaterial)
-            .cornerRadius(10)
-            .padding(.horizontal)
-            .font(.body)
+            .pickerStyle(.segmented)
+            .padding(.horizontal, 20)
             
-            HighlightedText(inputText: prompt.placeholderText, keywords: prompt.inputParameters.compactMap({$0.parameterName}))
+            Divider()
+                .padding(.vertical, 10)
             
-            Spacer()
-            
+            Group {
+                switch selectedTab {
+                case .parameters:
+                    InputParametersListView(inputParameters: $prompt.inputParameters)
+                case .prompt:
+                    VStack(spacing: 10) {
+                        TextField("Enter title", text: $prompt.title)
+                            .font(.headline)
+                            .foregroundStyle(Color.accentColor)
+                        
+                        Divider()
+                        
+                        ZStack(alignment: .topLeading) {
+                            TextEditor(text: $prompt.placeholderText)
+                                .scrollContentBackground(.hidden)
+                                .background(.clear)
+                                .frame(height: 50)
+                                .padding(.leading, -5)
+                            
+                            if prompt.defaultText.isEmpty {
+                                Text("Enter your prompt")
+                                    .foregroundColor(Color(.tertiaryLabelColor))
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading) {
+                            Picker("Kategorie", selection: $prompt.category) {
+                                ForEach(Prompt.Category.allCases, id: \.self) { category in
+                                    Text(category.rawValue)
+                                        .tag(category)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        .padding(.top, 10)
+                    }
+                    .textFieldStyle(.plain)
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+                    .font(.body)
+                }
+            }
+            .padding(.horizontal, 20)
             HStack(spacing: 10) {
                 Button("Fertig") {
                     if prompt.title != "" && prompt.placeholderText != "" {
+                        //remove all empty parameters
+                        prompt.inputParameters.removeAll { $0.parameterName.isEmpty }
+                        
                         viewModel.save(prompt)
                         presented = false
                     }
