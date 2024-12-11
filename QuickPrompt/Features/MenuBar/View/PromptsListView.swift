@@ -31,6 +31,8 @@ struct PromptsListView: View {
             }
             
             .onAppear {
+                viewModel.selectedPrompt = nil
+                viewModel.copiedPrompt = nil
                 viewModel.searchText.removeAll()
             }
         }
