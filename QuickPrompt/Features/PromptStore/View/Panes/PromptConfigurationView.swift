@@ -36,7 +36,7 @@ struct PromptConfigurationView: View {
                             .foregroundStyle(Color.accentColor)
                             .textFieldStyle(.plain)
                             .padding()
-                            .background(.ultraThinMaterial)
+                            .background(Color.backgroundGrey)
                             .cornerRadius(10)
                             .font(.body)
                     }

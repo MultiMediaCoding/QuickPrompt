@@ -38,7 +38,7 @@ struct InputParametersListView: View {
                     }
                     .textFieldStyle(.plain)
                     .padding()
-                    .background(.ultraThinMaterial)
+                    .background(Color.backgroundGrey)
                     .cornerRadius(10)
                     .padding(.horizontal)
                     .font(.body)
@@ -58,7 +58,7 @@ struct InputParametersListView: View {
                         .scaledToFit()
                         .padding(8)
                         .frame(width: 25, height: 25)
-                        .background(.thinMaterial)
+                        .background(Color.backgroundGrey)
                         .cornerRadius(8)
                         .padding(.leading)
                         .padding(.bottom)
