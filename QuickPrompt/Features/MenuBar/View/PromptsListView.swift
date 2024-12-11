@@ -17,9 +17,21 @@ struct PromptsListView: View {
         }
         else {
             VStack(alignment: .leading){
+                PlainButton {
+                    if let selectedPrompt = viewModel.selectedPrompt {
+                        viewModel.copyPrompt(selectedPrompt)
+                    }
+                }
+                .keyboardShortcut(.defaultAction)
+                
                 ForEach(viewModel.prompts, id: \.self) { prompt in
                     PromptListItem(prompt: prompt)
+                        .id(prompt.id)
                 }
+            }
+            
+            .onAppear {
+                viewModel.searchText.removeAll()
             }
         }
     }
@@ -28,3 +40,4 @@ struct PromptsListView: View {
 #Preview {
     PromptsListView()
 }
+

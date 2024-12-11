@@ -44,9 +44,13 @@ struct PromptListItem: View {
                     }
                 }
                 .buttonStyle(.plain)
-              
+                
             }.frame(maxWidth: .infinity)
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 7)
+                .stroke(viewModel.selectedPrompt == prompt ? Color.accentColor : .clear, lineWidth: 1)
+        )
     }
 }
 

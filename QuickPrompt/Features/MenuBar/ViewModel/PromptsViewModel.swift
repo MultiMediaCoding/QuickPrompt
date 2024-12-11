@@ -15,6 +15,8 @@ class PromptsViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var copiedPrompt: Prompt?
     
+    @Published var selectedPrompt: Prompt?
+    
     var filteredPrompts: [Prompt] {
         savedPrompts.compactMap({$0.title.lowercased().contains(searchText.lowercased()) || $0.text.lowercased().contains(searchText.lowercased()) ? $0 : nil })
     }
@@ -23,6 +25,18 @@ class PromptsViewModel: ObservableObject {
     
     init() {
         savedPrompts = PersonalPromptsManager.shared.savedPrompts
+    }
+    
+    func selectPrompt(addIndex: Int) {
+        if
+            let selectedPrompt = selectedPrompt,
+            let index = prompts.firstIndex(of: selectedPrompt)
+        {
+            if index + addIndex <= prompts.count - 1 && index + addIndex >= 0 {
+               let nextPrompt = prompts[index + addIndex]
+                self.selectedPrompt = nextPrompt
+            }
+        }
     }
     
     func savePrompt(_ prompt: Prompt) {

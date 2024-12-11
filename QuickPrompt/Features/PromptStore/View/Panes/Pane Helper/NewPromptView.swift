@@ -81,13 +81,6 @@ struct NewPromptView: View {
                             
                             ZStack(alignment: .topLeading) {
                                 HighlightedTextEditor(text: $prompt.placeholderText, highlightRules: rules)
-                                // optional modifiers
-                                    .onCommit { print("commited") }
-                                    .onEditingChanged { print("editing changed") }
-                                    .onTextChange { print("latest text value", $0) }
-                                    .onSelectionChange { (range: NSRange) in
-                                        print(range)
-                                    }
                                     .introspect { editor in
                                         // access underlying UITextView or NSTextView
                                         editor.textView.backgroundColor = NSColor(Color.backgroundGrey)
