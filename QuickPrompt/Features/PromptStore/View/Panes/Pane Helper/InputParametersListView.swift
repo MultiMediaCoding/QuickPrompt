@@ -56,7 +56,7 @@ struct InputParametersListView: View {
                     .scaledToFit()
                     .padding(8)
                     .frame(width: 25, height: 25)
-                    .background(.thinMaterial)
+                    .background(.backgroundGrey)
                     .cornerRadius(8)
                     .padding(.leading)
                     .padding(.bottom)
