@@ -12,7 +12,7 @@ struct PromptConfigurationView: View {
     @Binding var isPresented: Bool
     
     @EnvironmentObject var viewModel: PromptsViewModel
-
+    
     init(prompt: Prompt, isPresented: Binding<Bool>) {
         self._prompt = State(initialValue: prompt)
         self._isPresented = isPresented
@@ -47,21 +47,14 @@ struct PromptConfigurationView: View {
                     viewModel.savePrompt(prompt)
                     isPresented.toggle()
                 } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        
-                        Text("Prompt hinzufügen")
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-                            .padding(.leading)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 35)
-                    .background(Color.accentColor)
-                    .cornerRadius(8)
+                    Label("Prompt hinzufügen", systemImage: "plus.circle.fill")
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 35)
+                        .background(Color.accentColor)
+                        .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
-
             }
             .padding()
             .frame(minHeight: 200)

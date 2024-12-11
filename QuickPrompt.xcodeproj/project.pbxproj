@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3B2EA92D09DBAA001C7CC1 /* HighlightedTextEditor in Frameworks */ = {isa = PBXBuildFile; productRef = 3A3B2EA82D09DBAA001C7CC1 /* HighlightedTextEditor */; };
 		3AF378A42D0372960066ABC3 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3AF378A32D0372960066ABC3 /* WhatsNewKit */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3B2EA92D09DBAA001C7CC1 /* HighlightedTextEditor in Frameworks */,
 				3AF378A42D0372960066ABC3 /* WhatsNewKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +108,7 @@
 			name = QuickPrompt;
 			packageProductDependencies = (
 				3AF378A32D0372960066ABC3 /* WhatsNewKit */,
+				3A3B2EA82D09DBAA001C7CC1 /* HighlightedTextEditor */,
 			);
 			productName = QuickPrompt;
 			productReference = 3A3446F42D03154A008E5D10 /* QuickPrompt.app */;
@@ -185,6 +188,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
+				3A3B2EA72D09DBAA001C7CC1 /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3A3446F52D03154A008E5D10 /* Products */;
@@ -391,6 +395,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,6 +424,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,6 +550,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A3B2EA72D09DBAA001C7CC1 /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kyle-n/HighlightedTextEditor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
 		3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit";
@@ -555,6 +569,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A3B2EA82D09DBAA001C7CC1 /* HighlightedTextEditor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A3B2EA72D09DBAA001C7CC1 /* XCRemoteSwiftPackageReference "HighlightedTextEditor" */;
+			productName = HighlightedTextEditor;
+		};
 		3AF378A32D0372960066ABC3 /* WhatsNewKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3AF378A22D0372960066ABC3 /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
